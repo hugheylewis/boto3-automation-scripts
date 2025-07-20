@@ -1,7 +1,8 @@
 import boto3
-from datetime import datetime, timedelta, timezone
+from format_date import format_date, start_date, end_date
 
 ec2 = boto3.client('ec2', region_name='us-east-2')
+ce = boto3.client('ce')
 instance_id = ''
 response = ec2.describe_instances(    
     Filters=[
@@ -17,5 +18,3 @@ response = ec2.describe_instances(
 for instances in response['Reservations']:
     for instance in instances['Instances']:
         instance_id = instance['InstanceId']
-
-print(instance_id)
